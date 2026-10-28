@@ -18,7 +18,7 @@ Groups A and E justify an edit on one sighting. A tell marked *weak* needs a sec
 ## B. Rhythm by rule
 
 7. **Forced triads.** Items arrive in threes whether or not the meaning has three parts. Use the real number.
-8. **Opening with a count.** "Two cautions." "Three things to know." State the first point.
+8. **Describing the text.** "Two cautions." "Three things to know." "The table below lists...", "This section covers...". State the first point. A heading goes straight into its table or list.
 9. **Repeated openings.** Several sentences in a row start with the same word. Merge them or begin with the action. *Weak.*
 10. **Stacked qualifiers.** "Could potentially", "might arguably", "it's also possible that". Keep one qualifier when the evidence supports it. *Weak.*
 11. **Same rhythm everywhere.** Three sentences of the same length in a row, or every paragraph ending on a punchy line. Vary them. *Weak.*
@@ -53,6 +53,9 @@ Groups A and E justify an edit on one sighting. A tell marked *weak* needs a sec
 31. **Knowledge-limit hedges.** "Based on available information", "it appears that", "likely". Say what you checked and what you didn't. Never present a guess as a fact.
 32. **Writing about the previous version.** "This replaces the old approach of ..." Describe the current behavior. A changelog or migration guide is the only place for the old version.
 33. **Synonym cycling.** The same thing named three ways in one paragraph. Pick one name and repeat it.
+34. **Answering in place.** A sentence added because someone asked a question reads as a reaction. Rewrite it as the sentence the text would have had from the start, or put the answer in the reply.
+    - Before: "To answer the retry question, the job does retry, up to 3 times."
+    - After: "The job retries 3 times and then marks the row failed."
 
 ## When to leave text alone
 

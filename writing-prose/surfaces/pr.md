@@ -17,7 +17,7 @@ gh pr view --json title,body,baseRefName
 git diff "origin/$base"...HEAD
 ```
 
-Fix each sentence that no longer matches the code with `gh pr edit --body-file`, and fix the title the same way. Then tell the user in one line what changed. The user never has to ask for this.
+Fix each sentence that no longer matches the code with `gh pr edit --body-file`, and fix the title the same way. In Audit and Refresh, the new body is no longer than the old one unless the code gained a decision the reader needs. Then tell the user in one line what changed. The user never has to ask for this.
 
 ## Shape
 
