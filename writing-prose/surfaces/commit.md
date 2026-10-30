@@ -2,7 +2,7 @@
 
 This file owns the commit message. Save the message to a file and commit it with `git commit -F "$msg"`.
 
-A commit is a decision record. A reader three months from now, with no chat history, learns from it why the code is the way it is.
+The reader is **the cold reader**, three months from now, with only `git log`. A commit is a decision record that tells them why the code is the way it is.
 
 ## Shape
 
@@ -43,4 +43,4 @@ When a short before/after shows the effect faster than prose, put it in the body
 
 ## Check
 
-Run the cold reader check from `SKILL.md` on the body. A reader with only `git log` must understand why the commit exists.
+Run the reader check from `SKILL.md` on the body. A reader with only `git log` must understand why the commit exists.

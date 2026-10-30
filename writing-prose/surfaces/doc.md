@@ -1,6 +1,6 @@
 # Docs
 
-A README tells the reader which commands to run to get a result. When a command already does the work, the README names the command and the result, and the steps inside the command stay in the command.
+The reader is **the cold reader**, unless the doc names another audience. A README tells the reader which commands to run to get a result. When a command already does the work, the README names the command and the result, and the steps inside the command stay in the command.
 
 ```markdown
 ## Refresh the test database

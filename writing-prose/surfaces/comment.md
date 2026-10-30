@@ -1,6 +1,6 @@
 # Code comments and docstrings
 
-A comment carries a decision, a constraint, or a consequence that the code can't show. Add a 1 to 3 line example when it makes the point faster. The comment describes the code as it is now.
+The reader is **the cold reader**, with the file open. A comment carries a decision, a constraint, or a consequence that the code can't show. Add a 1 to 3 line example when it makes the point faster. The comment describes the code as it is now.
 
 Private methods get the same care as public ones. When a reader would ask "why does this exist?", the code needs a comment.
 

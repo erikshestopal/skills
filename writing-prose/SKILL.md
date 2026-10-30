@@ -1,44 +1,42 @@
 ---
 name: writing-prose
-description: Writes and revises prose for the user. Use before you write a commit message, a PR title or body, a review reply, a code comment, a doc, or a chat answer, and after every push to a branch that has an open PR.
+description: Writes and revises prose for the user. Use before you write a commit message, a PR title or body, a review reply, a code comment, a doc, a chat answer, a status update, or a question for the user, and after every push to a branch that has an open PR.
 ---
 
 # Writing prose
 
-Every piece of prose has one reader, the **cold reader**. The cold reader is an experienced engineer who knows the language, the framework, and the domain basics. They don't know this table, trigger, module, ticket, person, or local term. They read the text once, with no chat history. Write for that reader, in the user's voice.
+Write for one reader, in the user's voice. Each surface file names its reader.
+
+- **The cold reader** reads commits, PRs, review replies, comments, and docs. They're an experienced engineer who knows the language, the framework, and the domain basics. They don't know this table, module, ticket, person, or local term, and they read once with no chat history.
+- **The user** reads chat. They're a busy engineer who rarely reads the code and judges the work by outcomes. They skim, so write at a high-school level.
 
 ## Steps
 
-1. Name the surface and load its file. Each file adds the shape and rules for one kind of text.
+1. Name the surface and load its file.
+   - Commit message: `surfaces/commit.md`
+   - PR title or body, new or after a push: `surfaces/pr.md`
+   - Review reply on GitHub: `surfaces/reply.md`
+   - Code comment or docstring: `surfaces/comment.md`
+   - README, design doc, or other doc: `surfaces/doc.md`
+   - Chat answer, status update, or question for the user: `surfaces/chat.md`
+2. Find the **intent**. Answer three questions: what problem or cost exists today, what changes, and what someone can now do or stop doing. Take the answers from the user's words, the ticket, or the spec. If they aren't clear, ask the user one question and wait. A restatement of the diff isn't intent.
+3. Get the **evidence** for each claim: a test, a query, a benchmark, or a source line. When you can get it by running, reading, or querying something, get it before you write. Drop each claim you still can't back.
+4. Write the draft with this file and the surface file.
+5. Check the draft with the reader check below and `reference/tells.md`. When you revise existing text, the new version is shorter than the old one.
 
-   | Surface                                  | File                  |
-   |------------------------------------------|-----------------------|
-   | Commit message                           | `surfaces/commit.md`  |
-   | PR title or body, new or after a push    | `surfaces/pr.md`      |
-   | Review reply, or a question for the user | `surfaces/reply.md`   |
-   | Code comment or docstring                | `surfaces/comment.md` |
-   | README, design doc, or other doc         | `surfaces/doc.md`     |
-   | Chat answer                              | `surfaces/chat.md`    |
+## Reader check
 
-2. Find the **intent**. Answer three questions: what problem or cost exists today, what changes, and what someone can now do or stop doing. Take the answers from the user's words, the ticket, or the spec. If they aren't clear, ask the user one question and wait. A restatement of the diff is a change, and it isn't intent.
-3. Collect the evidence for each claim you plan to make: a query result, a snippet, a benchmark, or a source line you read. Drop each claim that has no evidence.
-4. Write the draft with the rules in this file and the surface file.
-5. Check the draft. Run the cold reader check below on every sentence, then read `reference/tells.md` and fix every tell. The draft is done when every sentence passes both. When you revise existing text, the new version is shorter than the old one.
+Read each sentence against these points:
 
-## Cold reader check
+1. **Resolve every reference.** Define each table, column, error code, module, ticket, person, and local term in one clause, or cut it. For a coded label, such as a section number or a decision ID, write the plain description and put the label in parentheses after it.
+2. **Show first.** When the point is behavior, data, or how parts connect, lead with a snippet, sample rows, a before/after, or a diagram. Prose carries only what the visual can't.
+3. **Cut what the code says.** A sentence that restates the code or lists what the diff shows goes.
+4. **Explain local things only.** Give at most one clause to the language, the framework, or a library the repo already uses.
+5. **Name the concrete event.** "An ending attempt" becomes "an attempt that succeeds, fails, or is abandoned".
+6. **Add a consequence only when it's needed.** State an edge case or an exclusion only when the reader would get it wrong without it.
+7. **Delete it in your head.** If the reader loses nothing they'd act on, delete it for real.
 
-Read each sentence against these eight points:
-
-1. **Resolve every reference.** Each table, column, trigger, error code, constant, module, ticket, PR number, person, and local term is defined in the same sentence or the one before it. Define it in one clause, or cut it. For a coded label, such as a section number, decision ID, or milestone, write the plain description and put the label in parentheses after it.
-2. **State a consequence only when it's needed.** Say what a thing is and stop. Add what it excludes, what happens when it's empty, or which edge cases it covers only when the reader would otherwise get it wrong, and give the reason in the same sentence.
-3. **Show first.** When the point is behavior or data, lead with a short snippet, sample rows, or a before/after. Prose carries only what the snippet can't.
-4. **Cut what the code says.** A sentence that restates the code beside it, or lists what the diff shows, goes.
-5. **Stay under the ceiling.** Explain local things only. Give at most one clause to the language, the framework, a gem the repo already uses, or a well known EHR fact.
-6. **Name the concrete event.** "An ending attempt" becomes "an attempt that succeeds, fails, or is abandoned". Point at real things, such as "this installation", and not at labels like A and B.
-7. **Write full sentences.** Each sentence has a subject, a verb, and an object.
-8. **Delete it in your head.** If the reader loses nothing they'd act on, delete it for real. Sentences that protect the writer, such as sources, caveats, and counts, usually fail.
-
-```
+```text
 DEFINE (local to this code)             LEAVE (the cold reader knows it)
 --------------------------------------  -----------------------------------
 reject_counters trigger                 the workflow gem
@@ -51,45 +49,48 @@ rsc table vs v_provider view names      Dentrix stores negative IDs
 
 ## Content
 
-Prose about code explains why, shows a decision, or shows a consequence. Keep:
+Keep:
 
 - The problem and the outcome.
 - Each design decision, with its reason in the same sentence.
 - Surprising behavior, with a short example.
-- **Why-evidence**, placed under the claim it supports: a benchmark when speed is the point, or a production query that shows a case can't happen.
-- The **current state** of the code. How the work got here stays in the chat.
+- **Proof** in one line, under the claim it supports, such as a benchmark or a production query.
+- The current state. How the work got here stays out.
 
-The diff is the **inventory** of files, methods, and line numbers, so the prose skips it. Test counts, CI, lint, and other validation results go to the user in chat. So does provenance: commit SHAs, branch names, "as of <date>", "verified against", and the sources you read. Keep a version only when the reader must pin it or act on it.
+Leave out the inventory of files, methods, and line numbers. Leave out provenance too: commit SHAs, branch names, test counts, CI results, "as of <date>", and the sources you read. Include one only when the reader must pin it or act on it.
 
 ## Visuals
 
 Pick the smallest view that makes the point. Use prose when two sentences carry it.
 
-- A before/after snippet or a focused `diff` is usually the best view.
-- Use pseudocode for logic and a call tree for runtime order.
-- Use a diagram only for behavior that isn't linear, such as a race, routing between services, or branches that prose can't carry. Render it with `bunx ondine@0.0.3 --ascii x.mmd 2>/dev/null` and paste the output in a `text` block under 80 columns.
-- In a terminal, draw tables with borders (`+---+`). On GitHub, use Markdown tables.
+- A before/after snippet or a focused `diff` for a code change.
+- Pseudocode for logic, and a call tree for runtime order.
+- A diagram for any relationship or flow, such as parts that connect, data that moves, branches, or a race. Write it in Mermaid and render it with `bunx ondine@0.0.3 --ascii x.mmd 2>/dev/null`. Paste the output in a `text` block under 80 columns. When it's too wide, shorten the labels or switch `LR` to `TD`. Don't hand-draw diagrams.
+- A table only to compare items across the same columns. In a terminal, draw it with borders (`+---+`). On GitHub, use Markdown.
 
 ## Sentences
 
-- Write complete sentences. A heading, a table cell, or a list fragment is the only exception.
+- Use subject, verb, object, in active voice. Use passive voice only when the actor is unknown.
 - Keep a step to 20 words or fewer and a description to 25 words or fewer.
-- When two actions share a subject, write one sentence with "and": "The job reads the rows and then writes the totals."
+- Write prose in full sentences. Headings, list items, labels, table cells, and diagram labels can be fragments.
 - Join related ideas with "and", "because", or "so". End the sentence when the ideas aren't related.
-- Separate clauses with a period or a comma. Write ranges with "to": "10 to 20 seconds".
-- Use parentheses only for an identifier, a coded label, or a first-use abbreviation: "electronic health record (EHR)". Put an aside in its own clause.
-- Use "can" for a real possibility. State a proven claim as a fact. For an unknown, say what you didn't check.
-- Contractions are fine.
-- Use active voice. Use passive voice only when the actor is unknown.
-- Use one term for one concept, everywhere in the text.
-- Use the plain word, straight quotes, sentence case headings, and bold only for a real warning.
-- For STE grammar and the word list, read `reference/ste.md` when a sentence still reads stiff or vague.
+- Use one term for one concept everywhere.
+- Use parentheses only for an identifier, a coded label, or a first-use abbreviation: "electronic health record (EHR)".
+- State a checked claim as a fact. Use "can" for a real possibility.
+- Bold only the few words a skimming reader must not miss, such as a warning, a verdict, or a decision.
+- Use straight quotes and sentence case headings. Contractions are fine.
+- Use the plain word: "use" for utilize or leverage, "to" for in order to, "because" for due to the fact that, "but" for however, "make sure" for ensure, "help" for facilitate.
+
+## Lists
+
+- Put the word that makes each item different first. Readers often see only the first two words.
+- Give every item the same parts in the same order, and show numbers in the same format.
+- Use one tense per list: past for finished items, and "-ing" for active ones.
+- Use verbs that show good or bad news, such as "Blocks", "Fails", or "Passes".
 
 ## Voice
 
-| Surface                          | Voice                                                     |
-|----------------------------------|-----------------------------------------------------------|
-| Commit, PR, comment, doc         | Neutral and plain. No "I", no opinions, no selling.       |
-| Chat answer, review reply        | The user's voice. "I" and a clear opinion are welcome.    |
+- **Commits, PRs, comments, and docs:** neutral and plain. No "I", no opinions, no selling.
+- **Chat and review replies:** the user's voice. "I" and a clear opinion are welcome.
 
 The user writes short and direct. When a sentence tries hard to sell a simple fact, state the fact.

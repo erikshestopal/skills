@@ -1,14 +1,12 @@
 # PR titles and bodies
 
-This file owns the PR title and body. Save the body to a file and pass it with `gh pr create --body-file` or `gh pr edit --body-file`.
+The reader is **the cold reader**, as a reviewer. Save the body to a file and pass it with `gh pr create --body-file` or `gh pr edit --body-file`.
 
 ## Modes
 
-| Mode    | When                                              | Result                                |
-|---------|---------------------------------------------------|---------------------------------------|
-| Write   | A new PR, or the user asks for a description      | Title and body                        |
-| Audit   | The user asks to check, fix, or trim a body       | The fixed body                        |
-| Refresh | After every push to a branch that has an open PR  | The updated body, done without asking |
+- **Write:** for a new PR, or when the user asks for a description. Produce the title and body.
+- **Audit:** when the user asks to check, fix, or trim a body. Produce the fixed body.
+- **Refresh:** after every push to a branch that has an open PR. Update the body without asking.
 
 Refresh is part of every push. Before you report a push as done, compare the title and body with the code:
 
@@ -24,7 +22,7 @@ Fix each sentence that no longer matches the code with `gh pr edit --body-file`,
 ```markdown
 <intent: the problem, the change, the outcome. 1 to 3 sentences.>
 
-<optional: one before/after snippet, benchmark table, or merman diagram>
+<optional: one before/after snippet, benchmark table, or ondine diagram>
 
 - <decision>. <reason, in the same bullet>
 - <surprising behavior>. <short example>

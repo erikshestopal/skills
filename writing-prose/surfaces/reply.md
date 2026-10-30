@@ -1,18 +1,14 @@
-# Review replies and questions for the user
+# Review replies
 
-A review reply and a question for the user have the same job. They give a reader without context enough to decide.
+The reader is **the cold reader**, as a reviewer on GitHub. The reply gives them enough to decide.
 
 ## Shape
 
-1. Context: what the thing is, where it lives, and a short snippet or sample rows that show the problem.
-2. The answer or the question.
+1. Context, only what the reviewer needs to follow the answer: what the thing is, and a short snippet or sample rows that show the problem.
+2. The answer, or your question.
 3. What each answer changes.
 
-Write in the user's voice. "I" and a clear opinion are welcome. Keep it short enough to read in one pass.
-
-## Example
-
-This reply was approved:
+Keep it short enough to read in one pass. This reply was approved:
 
 ```
 `rsc` is the Dentrix table that holds providers. It has a view, `v_provider`,
@@ -30,9 +26,9 @@ The fix is to delete the view-name lines. They have no effect today, so no
 test result changes. Should I?
 ```
 
-## Replies on GitHub
+## Rules
 
-- Answer the reviewer's actual question first, in the first sentence.
+- Answer the reviewer's actual question, not a nearby one.
 - When the reviewer is right, say what you changed and point at the commit.
 - When the reviewer is wrong, show the evidence: the snippet, the query, or the version that proves it.
 - Write each paragraph as one line, and let GitHub wrap it.
