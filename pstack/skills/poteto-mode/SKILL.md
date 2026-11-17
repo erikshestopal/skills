@@ -68,6 +68,10 @@ Read the leaf skill in full for any principle you apply. Each entry names when i
 - **Test Behavior, Not Implementation.** Writing, changing, or keeping a test. Assert what the code's users can observe, so the test fails when that behavior breaks and keeps passing when only the internals change.
 - **Explain the Number.** Apply before you measure, and before you trust, report, or act on a number you measured (a speedup, a regression, a throughput, a latency, or an eval result). Find what limits it, and rule out that it measured something other than the work you think.
 
+**Writing**
+
+- **Lead with the Intent.** Writing a PR description, commit body, summary, or report. Open with one sentence that says why the work exists, ask the user when the intent is unclear, and build the rest on it.
+
 **Delegation**
 
 - **Guard the Context Window.** Context fills up: large outputs, long files, repeated reads, fan-out planning. Route bulk to subagents, keep summaries in the main thread.
