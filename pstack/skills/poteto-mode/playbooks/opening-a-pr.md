@@ -10,7 +10,7 @@ Invoked at the end of every other playbook.
 
 **Titles.** Conventional Commits `type(scope): subject`, no trailing period. Type such as `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, or `perf`. Scope is the area, such as `pstack` or `poteto-mode`. Subject is short, imperative, and names a real symbol when one carries the change, for example `fix(pstack): retarget opening-a-pr babysit trigger`.
 
-**Descriptions.** Write the body per **pstack:principle-lead-with-the-intent**: one sentence that says why the PR exists, then a few sentences that build on it. Ask the user for the intent when neither they nor the linked ticket stated it. The body becomes the squash commit body, so keep it short. Attach videos or screenshots when they prove a claim.
+**Descriptions.** Write the body per **pstack:principle-lead-with-the-intent**: one sentence that says why the PR exists, then `##` sections that each answer a question it raises. Ask the user for the intent when neither they nor the linked ticket stated it. The body becomes the squash commit body, so keep it short. Attach videos or screenshots when they prove a claim.
 
 **Forge.** Resolve the forge before the first PR operation and keep that choice for create, edit, view, watch, and merge. GitHub CLI (`gh`) is the default. If `command -v origin` succeeds and Origin can resolve the repository, prefer `origin pr ...`. If Origin is absent or cannot resolve the repository, stay on `gh` and record the fallback. Do not require Graphite (`gt`).
 
