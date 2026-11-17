@@ -6,20 +6,62 @@ Invoked at the end of every other playbook.
 
 **Commits.** Commit liberally. Rebase into small, ordered commits before opening PRs. Each commit is a future PR: landable, ordered to tell the story. Amend when the fix belongs in a just-made commit. New commit when separable. Commit bodies don't restate the subject.
 
-**PRs.** Run `pstack:deslop` over the diff before commit and `pstack:no-comments` before review. Write every PR title, description, and commit body with `pstack:technical-writing` (every layer except Diátaxis, and apply the STE vocabulary rules: one word per action, keep articles, a plain verb over `-ing` where one works), then apply `pstack:unslop`.
+**PRs.** Run `pstack:deslop` over the diff before commit and `pstack:no-comments` before review. Write every PR title, description, and commit body with [`pstack:technical-writing`](../../technical-writing/SKILL.md) (every layer except Diátaxis, and apply the STE vocabulary rules: one word per action, keep articles, a plain verb over `-ing` where one works), then apply [`pstack:unslop`](../../unslop/SKILL.md).
 
 **Titles.** Conventional Commits `type(scope): subject`, no trailing period. Type such as `feat`, `fix`, `docs`, `refactor`, `test`, `chore`, or `perf`. Scope is the area, such as `pstack` or `poteto-mode`. Subject is short, imperative, and names a real symbol when one carries the change, for example `fix(pstack): retarget opening-a-pr babysit trigger`.
 
-**Descriptions.** The PR body is a one-minute briefing, not a lab notebook, for a reviewer who has the diff. It says why the change exists, what it leaves out, what it could break, and how you proved it works. Write short, simple sentences with few identifiers, no walls of text. The body becomes the squash commit body, so keep that commit under about 40 lines. Use `##` headings, not bold lead-ins, in this order, and drop a section with nothing to say:
+**Descriptions.** The PR body is a briefing a reviewer skims in under 30 seconds, with the diff beside it. Do not list the changes: the diff and the commit log already show them. Use short sentences, one idea each, and no walls of text. The body becomes the squash commit body, so keep it under about 20 lines. Open with this, with no heading:
 
-- `## Why`: the problem and approach, 1–3 short sentences. No SHAs, rebase genealogy, or "based on main" preamble.
-- `## What changed`: 1–3 short bullets. Name a real symbol or path only when it carries the change. Name both sides of a rename or retarget.
-- `## Scope`: always. 1–3 short items on what it covers and what it deliberately leaves out (a follow-up, a known gap). No symbols, paths, or file-by-file essay.
-- `## Tradeoffs`: only rejected alternatives a reviewer would otherwise ask about. Skip when there was no real choice.
-- `## Blast Radius`: 1–2 sentences on who or what it touches and why that is safe or risky. If main is red, state the cost of leaving it red.
-- `## Verification`: 1–3 bullets, each a real run path and its outcome. Perf: one primary number with its unit, `before → after`, and a link to the arena or swarm directory for the rest. No sample-size methodology, swarm recitals, or metric tables.
+- One sentence, the bottom line: what the PR does for the user or the system.
+- Three bullets of one short sentence each: **Problem** (what goes wrong today), **Decision** (the rule or design chosen, with its source: ticket, product page, CFR section, or a dated team decision), and **Expect** (what a reviewer should see the system do). Cut a bullet that runs to a second sentence back to one.
+- When the decision is a flow or a set of states, such as who can end a truck session and when, a small Mermaid diagram after the bullets instead of prose.
 
-After the sections, attach videos or screenshots when they prove a claim. Full SHAs, swarm or arena lane recitals, lever-correction essays, file-by-file checklists, and "CLEAN" verdicts go in a linked artifact, not the body.
+A reader who stops after the opener knows why to merge it. It conveys the decision, not the edits that carry it out: no file names, symbols, SHAs, or "based on main" preamble.
+
+Then add only the sections that have something to say, as `##` headings in this order:
+
+- `## Scope`: what it deliberately leaves out, such as a follow-up or a known gap. 1–2 items.
+- `## Tradeoffs`: a rejected alternative a reviewer would otherwise ask about. Skip when there was no real choice.
+- `## Blast Radius`: 1–2 sentences on who or what it affects and why that is safe or risky. If main is red, state the cost of leaving it red.
+- `## Verification`: 1–3 bullets, each a real check and its result. Perf: one primary number with its unit, `before → after`, and a link to the arena or swarm directory for the rest.
+
+Name a file or symbol only when the reviewer needs it to judge a section, such as both sides of a rename.
+
+Example, a whole PR body (gateway#69, trimmed); the outer fence is not part of it:
+
+````markdown
+Each truck now has one primary driver, and a truck session ends only when the drive is over.
+
+- **Problem:** two drivers could both claim to drive one truck, and each truck login and logout went on the log as an ELD login and logout.
+- **Decision:** one primary per truck, no ELD login or logout for a truck session, and no logout mid-drive (STA-474; team decisions, Nov 17; STA-578).
+- **Expect:** a second primary or a third driver is refused, and the primary's logout ends every co-driver's session.
+
+```mermaid
+flowchart LR
+  L["Truck logout"] --> M{"Truck proven moving?"}
+  M -- yes --> R1["409 vehicle_moving"]
+  M -- "no, or unknown" --> D{"Anyone logged in to it in Driving?"}
+  D -- yes --> R2["409 driver_in_driving"]
+  D -- no --> P{"Primary driver?"}
+  P -- yes --> E1["Ends every session at the truck"]
+  P -- no --> E2["Ends this driver's session"]
+```
+
+## Scope
+
+- Switching who drives at a stop is STA-415, so FMCSA case ELD-FUNC-4.3.2-5 stays blocked on it.
+
+## Blast Radius
+
+Every truck login and logout goes through these rules. Today's app still asks for the `driving` role, and the Gateway ignores it, so logins keep working until ios #66 ships.
+
+## Verification
+
+- CI passes: 137 of 139 FMCSA cases pass, 0 fail, 2 are blocked.
+- A curl run against this branch as the compose Gateway matched every answer in the chart.
+````
+
+After the sections, attach videos or screenshots when they prove a claim. Change lists, full SHAs, swarm or arena lane recitals, lever-correction essays, file-by-file checklists, and "CLEAN" verdicts go in a linked artifact, not the body.
 
 **Forge.** Resolve the forge before the first PR operation and keep that choice for create, edit, view, watch, and merge. GitHub CLI (`gh`) is the default. If `command -v origin` succeeds and Origin can resolve the repository, prefer `origin pr ...`. If Origin is absent or cannot resolve the repository, stay on `gh` and record the fallback. Do not require Graphite (`gt`).
 
